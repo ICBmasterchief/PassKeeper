@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pass Keeper - Add New Site</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <header>
+        <h1><strong>CREATE NEW SITE</strong></h1>
+    </header>    
+    <main>
+        <div class="container__div">
+            <div class="container__div-labels">
+                <label>Name*</label>
+                <label>Url*</label>
+                <label>User*</label>
+                <label>Password*</label>
+                <label>Description</label>
+            </div>
+            <div class="container__div-inputs">
+                <input type="text" id="input_name"></input>
+                <input type="text" id="input_url"></input>
+                <input type="text" id="input_user"></input>
+                <input type="text" id="input_password"></input>
+                <input type="text" id="input_description"></input>
+            </div>
+        </div>
+        <div id="small_info">
+            <span>* : Requiered field.</span>
+        </div>
+        <div class="div__buttons">
+            <button onclick="saveSiteButton()">Save</button>
+            <a href="./index.html"><button>Cancel</button></a>
+        </div>
+    </main>
+</body>
+</html>
