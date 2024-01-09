@@ -28,12 +28,21 @@ li {
     justify-content: space-between;
     gap: 25px;
     padding: 5px;
-    cursor: pointer;
 }
 
 a {
     text-decoration: none;
     color: black;
+}
+
+.div__category {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.div__category:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .div__buttons {
@@ -92,7 +101,6 @@ a {
     z-index: 1000;
   }
 
-  /* Estilos para oscurecer el fondo cuando aparece el modal */
   #modalOverlay {
     display: none;
     position: fixed;
