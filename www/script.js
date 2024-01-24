@@ -137,6 +137,37 @@ let drawData = (data) => {
     }
   }
 
+  function generatePassword() {
+    const passLength = 10;
+
+    const mayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minus = "abcdefghijklmnopqrstuvwxyz"
+    const numbers = "0123456789"
+    const signs = ".,:;¡!¿?&%$€#@=/\()[]{}*+-_<>"
+
+    let createdPassword = "";
+    
+    for (let i = 0; i < passLength; i++) {
+      let rng = Math.floor(Math.random() * 4)
+
+      if (rng >= 0 && rng < 1) {
+        createdPassword += randomChar(mayus)
+      } else if (rng >= 1 && rng < 2) {
+        createdPassword += randomChar(minus)
+      } else if (rng >= 2 && rng < 3) {
+        createdPassword += randomChar(numbers)
+      } else {
+        createdPassword += randomChar(signs)
+      }
+    }
+
+    document.getElementById('input_password').setAttribute("value",createdPassword)
+  }
+
+  function randomChar(type_array){
+    return type_array.charAt(Math.floor(Math.random() * type_array.length));
+  }
+
   function saveSiteButton() {
     let siteName = document.getElementById('input_name').value
     let siteUrl = document.getElementById('input_url').value

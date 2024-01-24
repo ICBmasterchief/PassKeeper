@@ -71,3 +71,17 @@ body h1{
     margin-left: 35px;
     margin-bottom: 20px;
 }
+
+#input_password {
+    width: 95%;
+}
+
+#button_generate {
+	cursor: pointer;
+    margin-right: 15px;
+
+}
+
+#div_password {
+   margin-left: 10px;
+}
