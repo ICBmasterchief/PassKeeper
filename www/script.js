@@ -7,15 +7,18 @@ let drawData = (data) => {
         let child = document.createElement('li')
         child.setAttribute("id", "c-"+category.id)
         child.setAttribute("data-id", category.id)
-        //child.style.backgroundColor = "none"
-        //child.onclick = function() {getCategory(child.getAttribute("id"));} //child.style.backgroundColor="green"}
-        // child.innerText = JSON.stringify(category)
-        // child.innerText = category.name
-        child.innerHTML = `<span onclick="getCategory('${child.getAttribute("data-id")}');">${category.name}</span><button onclick="deleteCategory(${category.id})" class="button__delete"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg></button>`
+        child.setAttribute("class", "list-group-item")
+        child.innerHTML = `<div class="div__category"><span class="span__category" onclick="getCategory('${child.getAttribute("data-id")}'); categoryTitle('${category.name}');">${category.name}</span><span class="span__delete-category"><button onclick="deleteCategory(${category.id})" class="button__delete"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg></button></span></div>`
         console.log(parent);
         parent.appendChild(child)
       }
     })
+  }
+
+  function categoryTitle(categoryName) {
+    let element = document.getElementById('category-title')
+    element.innerText = categoryName
+    console.log(element)
   }
 
   function getCategory(idCategory) {
@@ -23,13 +26,13 @@ let drawData = (data) => {
     fetch(`http://localhost:3000/categories/${idCategory}`)
     .then(res => res.json())
     .then(category => drawTable(category))
-    console.log(idCurrentCategory)
   }
 
   function deleteCategory(idCategory) {
     fetch(`http://localhost:3000/categories/${idCategory}`, { method: 'DELETE' })
     .then(res => {
       deleteElements(".container tbody tr")
+      categoryTitle("")
       let child = document.getElementById("c-"+idCategory)
       child.remove()
     })
@@ -67,7 +70,6 @@ let drawData = (data) => {
         password: sitePassword,
         description: siteDescription
       }
-  
       fetch(`http://localhost:3000/categories/${localStorage.getItem("idCategory")}`, { 
         method: 'POST',
         headers: {
@@ -135,6 +137,37 @@ let drawData = (data) => {
     }
   }
 
+  function generatePassword() {
+    const passLength = 10;
+
+    const mayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minus = "abcdefghijklmnopqrstuvwxyz"
+    const numbers = "0123456789"
+    const signs = ".,:;¡!¿?&%$€#@=/\()[]{}*+-_<>"
+
+    let createdPassword = "";
+    
+    for (let i = 0; i < passLength; i++) {
+      let rng = Math.floor(Math.random() * 4)
+
+      if (rng >= 0 && rng < 1) {
+        createdPassword += randomChar(mayus)
+      } else if (rng >= 1 && rng < 2) {
+        createdPassword += randomChar(minus)
+      } else if (rng >= 2 && rng < 3) {
+        createdPassword += randomChar(numbers)
+      } else {
+        createdPassword += randomChar(signs)
+      }
+    }
+
+    document.getElementById('input_password').setAttribute("value",createdPassword)
+  }
+
+  function randomChar(type_array){
+    return type_array.charAt(Math.floor(Math.random() * type_array.length));
+  }
+
   function saveSiteButton() {
     let siteName = document.getElementById('input_name').value
     let siteUrl = document.getElementById('input_url').value
@@ -142,11 +175,11 @@ let drawData = (data) => {
     let sitePassword = document.getElementById('input_password').value
     let siteDescription = document.getElementById('input_description').value
     if (siteName != null && siteName != "" && siteUrl != null && siteUrl != "" && siteUser != null && siteUser != "" && sitePassword != null && sitePassword != "") {
-        addSite(siteName, siteUrl, siteUser, sitePassword, siteDescription)
-        alert('Added site: ' + siteName)
-        returnToIndex()
+      addSite(siteName, siteUrl, siteUser, sitePassword, siteDescription)
+      alert('Added site: ' + siteName)
+      returnToIndex()
     } else {
-        alert('You must write all the requiered fields!')
+      alert('You must write all the requiered fields!')
     }
   }
 
