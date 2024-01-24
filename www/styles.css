@@ -3,36 +3,9 @@ body {
     margin: 5%;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-}
-  
-th, td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-  
-th {
-    background-color: #f2f2f2;
-}
-
-ul {
-    width: 175px;
-}
-
-li {
-    display: flex;
-    justify-content: space-between;
-    gap: 25px;
-    padding: 5px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
+body h1{
+    margin-left: 35px;
+    margin-bottom: 20px;
 }
 
 .div__category {
@@ -41,7 +14,12 @@ a {
     cursor: pointer;
 }
 
-.div__category:hover {
+.span__delete-category button{
+    float: right;
+    margin-left: 15px;
+}
+
+.span__category:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -89,7 +67,12 @@ a {
     margin: 15px;
 }
 
-#categoryModal {
+#div-primary-buttons {
+    margin-left: 35px;
+    margin-bottom: 20px;
+}
+
+/* #categoryModal {
     display: none;
     position: fixed;
     top: 50%;
@@ -110,4 +93,4 @@ a {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
-  }
+  } */
